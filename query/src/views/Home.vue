@@ -5,7 +5,7 @@
     <div class="banner">
       <div class="img"></div>
       <div class="serch-bar">
-        <div @click="openselect()" class="option-bar">
+        <div @click="openselect($event)" class="option-bar">
           <div class="option">选项</div>
           <div class="arrow-bar">
             <img src="../assets/路径.png" />
@@ -21,22 +21,22 @@
     <div v-show="select_main" class="select-content">
       <img src="../assets/hzau_logo.jpg" class="select-hzau-img">
       <img
-        @click="openselect()"
+        @click="openselect($event)"
         src="../assets/cancel.png"
         class="cancel-icon"
       />
       <div class="select-item-main">
         <div class="select-title">Source:</div>
-        <div class="select-button">CMS</div>
-        <div class="select-button">VMS</div>
-        <div class="select-button">Promis</div>
-        <div class="select-button">LEI</div>
-        <div class="select-button">HDFS</div>
+        <div v-bind:class="{ select_button: !select_state.cms, selected_button: select_state.cms }">CMS</div>
+        <div v-bind:class="{ select_button: !select_state.vms, selected_button: select_state.vms }">VMS</div>
+        <div v-bind:class="{ select_button: !select_state.promis, selected_button: select_state.promis }">Promis</div>
+        <div v-bind:class="{ select_button: !select_state.lei, selected_button: select_state.lei }">LEI</div>
+        <div v-bind:class="{ select_button: !select_state.hdfs, selected_button: select_state.hdfs }">>HDFS</div>
         <div class="select-title">Type:</div>
-        <div class="select-button">Person</div>
-        <div class="select-button">Location</div>
-        <div class="select-button">Case</div>
-        <div class="select-button">All</div>
+        <div v-bind:class="{ select_button: !select_state.person, selected_button: select_state.person }">Person</div>
+        <div v-bind:class="{ select_button: !select_state.location, selected_button: select_state.location }">Location</div>
+        <div v-bind:class="{ select_button: !select_state.case, selected_button: select_state.case }">Case</div>
+        <div v-bind:class="{ select_button: !select_state.typeAll, selected_button: select_state.typeAll }">All</div>
       </div>
     </div>
     <div class="data-bar-wrapper">
@@ -82,9 +82,13 @@ export default {
     };
   },
   methods: {
-    openselect() {
+    openselect(event) {
       this.select_main = !this.select_main;
+      console.log(event.target)
     },
+    changestate(event){
+      console.log(event.target)
+    }
   },
   components: {
     TopBar,
@@ -280,7 +284,7 @@ body {
 }
 .select-content {
   width: 70%;
-  height: 50%;
+  height: 53%;
   z-index: 999;
   background: #ffffff;
   margin: 0 auto;
@@ -289,7 +293,7 @@ body {
   top: 20%;
   border-radius: 10px;
 }
-.select-button {
+.select_button {
   width: 169px;
   height: 63px;
   border-radius: 50px;
@@ -304,7 +308,7 @@ body {
   text-align: center;
   margin: 20px;
 }
-.selected-button {
+.selected_button {
   width: 169px;
   height: 63px;
   border-radius: 50px;
@@ -342,9 +346,8 @@ body {
 {
   width: 100px;
   height: 100px;
-  margin: 10px 0 0 10px;
-  background-color: #fff;
-  padding: 10px;
+  margin: 5% 0 0 46%;
+
 }
 .cancel-icon {
   width: 30px;
@@ -353,7 +356,4 @@ body {
   margin: 30px 30px 0 0;
 }
 
-.a {
-  margin: 0;
-}
 </style>
