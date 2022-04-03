@@ -49,16 +49,17 @@ export default {
 </script>
 
 <style scoped>
-html, body {
-  width: 100%;
+* {
+  margin: 0;
+  padding: 0;
 }
 
 
 .banner {
+  margin-left: -8px;
   position: absolute;
-  left: -11px;
   top: 85px;
-  width: 1931px;
+  width: 100%;
   height: 370px;
   border-radius: 0px 0px 38px 38px;
   mix-blend-mode: overlay;
@@ -70,7 +71,8 @@ html, body {
 
   /* 矩形 14 */
   position: absolute;
-  left: 831px;
+  left: 50%;
+  transform: translateX(-50%);
   top: 45px;
   width: 258px;
   height: 126px;
@@ -82,7 +84,8 @@ html, body {
   
   /* 矩形 4 */
   position: absolute;
-  left: 374px;
+  left: 50%;
+  transform: translateX(-50%);
   top: 206px;
   width: 1240px;
   height: 85px;
@@ -159,15 +162,24 @@ html, body {
 }
 
 .data-bar-wrapper {
+  margin-left: -8px;
+  position: absolute;
+  top: 456px;
   width: 100%;
 }
 
 .data-bar-wrapper .data-bar {
-  position: absolute;
+  /* position: absolute; */
+ 
   width: 1240px;
-  left: 364px;
-  top: 456px;
+  margin: 0 auto;
+  left: 50%;
   height: 1000px;
+
+}
+
+.data-bar-wrapper .data-bar .data-bar-top {
+  position: absolute;
 }
 
 .data-bar-wrapper .data-bar .data-bar-top .data-left img{
@@ -185,7 +197,7 @@ html, body {
   /* Listofdata */
   position: absolute;
   left: 87px;
-  top: 34px;
+  top: 68px;
   width: 218px;
   height: 54px;
   font-family: HarmonyOS_Sans_SC;
