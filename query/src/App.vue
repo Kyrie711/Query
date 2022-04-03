@@ -13,8 +13,9 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 html, body {
   width: 100%;
+  
 }
 </style>
