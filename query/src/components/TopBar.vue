@@ -12,11 +12,16 @@ export default {
 </script>
 
 <style scoped>
+    html, body {
+
+    margin: 0;
+    padding: 0;
+    }
     .top-bar {
         position: absolute;
         left: 0px;
         top: 0px;
-        width: 1920px;
+        width: 100%;
         height: 85px;
         background: rgba(0, 95, 122, 0.88);
     }
@@ -32,7 +37,7 @@ export default {
     .top-bar a {
         text-decoration: none;
         position: absolute;
-        left: 1824px;
+        left: 90vw;
         top: 27px;
         width: 96px;
         height: 31px;
