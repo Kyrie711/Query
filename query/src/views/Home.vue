@@ -343,11 +343,17 @@ body {
   width: 100px;
   height: 100px;
   margin: 10px 0 0 10px;
+  background-color: #fff;
+  padding: 10px;
 }
 .cancel-icon {
   width: 30px;
   height: 30px;
   float: right;
   margin: 30px 30px 0 0;
+}
+
+.a {
+  margin: 0;
 }
 </style>
