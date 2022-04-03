@@ -16,6 +16,21 @@
         </div>
       </div>
     </div>
+    <div class="data-bar-wrapper">
+      <div class="data-bar">
+        <div class="data-bar-top">
+          <div class="data-left">
+            <img src="../assets/路径2.png">
+            <p>List of data</p>
+            <div></div>
+          </div>
+          <div class="data-right">
+            Found 100 matches in 63ms
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -142,4 +157,67 @@ html, body {
 .banner .serch-bar .serch img {
   padding: 3px;
 }
+
+.data-bar-wrapper {
+  width: 100%;
+}
+
+.data-bar-wrapper .data-bar {
+  position: absolute;
+  width: 1240px;
+  left: 364px;
+  top: 456px;
+  height: 1000px;
+}
+
+.data-bar-wrapper .data-bar .data-bar-top .data-left img{
+  
+  /* pie-chart-fill */
+  position: absolute;
+  left: 27px;
+  top: 77px;
+  width: 34px;
+  height: 34px;
+}
+
+.data-bar-wrapper .data-bar .data-bar-top .data-left p {
+  
+  /* Listofdata */
+  position: absolute;
+  left: 87px;
+  top: 34px;
+  width: 218px;
+  height: 54px;
+  font-family: HarmonyOS_Sans_SC;
+  font-size: 36px;
+  font-weight: normal;
+  letter-spacing: 0em;
+  color: rgba(0, 0, 0, 0.63);
+}
+.data-bar-wrapper .data-bar .data-bar-top .data-left div{
+  position: absolute;
+  left: 32px;
+  top: 124px;
+  width: 240px;
+  height: 0px;
+  border: 1px solid #1E7189;
+}
+
+.data-bar-wrapper .data-bar .data-bar-top .data-right {
+
+  /* Found100matchesin63ms */
+  position: absolute;
+  left: 820px;
+  top: 80px;
+  width: 380px;
+  height: 34px;
+  font-family: SourceHanSansCN-Regular;
+  font-size: 28px;
+  font-weight: normal;
+  line-height: 34px;
+  letter-spacing: 0em;
+  color: #9E9E9E;
+}
+
+
 </style>
