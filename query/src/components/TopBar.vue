@@ -47,4 +47,5 @@ export default {
         letter-spacing: 0em;
         color: #FFFFFF;
     }
+    
 </style>
