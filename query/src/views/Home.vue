@@ -32,11 +32,28 @@
         <div @click="changestate(3,$event)" v-bind:class="{ select_button: !select_state[2].Promis, selected_button: select_state[2].Promis }">Promis</div>
         <div @click="changestate(4,$event)" v-bind:class="{ select_button: !select_state[3].LEI, selected_button: select_state[3].LEI }">LEI</div>
         <div @click="changestate(5,$event)" v-bind:class="{ select_button: !select_state[4].HDFS, selected_button: select_state[4].HDFS }">HDFS</div>
-        <div class="select-title">Type:</div>
+        <!-- <div class="select-title">Type:</div>
         <div @click="changestate(6,$event)" v-bind:class="{ select_button: !select_state[5].Person, selected_button: select_state[5].Person }">Person</div>
         <div @click="changestate(7,$event)" v-bind:class="{ select_button: !select_state[6].Location, selected_button: select_state[6].Location }">Location</div>
         <div @click="changestate(8,$event)" v-bind:class="{ select_button: !select_state[7].Case, selected_button: select_state[7].Case }">Case</div>
-        <div @click="changestate(9,$event)" v-bind:class="{ select_button: !select_state[8].All, selected_button: select_state[8].All }">All</div>
+        <div @click="changestate(9,$event)" v-bind:class="{ select_button: !select_state[8].All, selected_button: select_state[8].All }">All</div> -->
+        <div class="select-type">
+            <select required="required" v-model="selected">
+              <option value="" disabled="disabled" selected="selected">Select option</option>
+              <option value="One">One</option>
+              <option value="Two">Two</option>
+              <option value="Three">Three</option>
+              <option value="Four">Four</option>
+              <option value="Five">Five</option>
+              <option value="Six">Six</option>
+              <option value="Seven">Seven</option>
+            </select>
+            <!-- <span>Selected: {{selected}}</span> -->
+        </div>
+        <div class="select-input">
+          <span>limit:</span>
+          <input type="number" placeholder="5000">
+        </div>
       </div>
     </div>
     <div class="data-bar-wrapper">
@@ -79,6 +96,7 @@ export default {
       update: false,
       criteria: {},
       data: null,
+      selected: '',
     };
   },
   methods: {
@@ -87,7 +105,6 @@ export default {
     },
     changestate(data,e){
       let target=e.target.innerHTML;
-      console.log(target);
       for(let i=1;i<=9;i++)
       {
       if(data==i)
@@ -95,20 +112,6 @@ export default {
         this.select_state[i-1][target]=!this.select_state[i-1][target];
       }
       }
-
-      // else if(data==2)
-      // {
-      //   this.select_state.vms=!this.select_state.vms;
-      // }
-      // else if(data==3)
-      // {
-      //   this.select_state.promis=!this.select_state.promis;
-      // }
-      // else if(data==4)
-      // {
-      // this.select_state.vms=!this.select_state.vms
-      // }
-
     }
   },
   components: {
@@ -141,6 +144,7 @@ body {
 
 .banner .img {
   /* 矩形 14 */
+  opacity: .6;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -295,7 +299,7 @@ body {
 }
 .bg-select {
   width: 100%;
-  height: 1000px;
+  height: 10000px;
   background: black;
   opacity: 0.5;
   z-index: 99;
@@ -313,9 +317,10 @@ body {
   left: 15%;
   top: 20%;
   border-radius: 10px;
+  min-height: 500px;
 }
 .select_button {
-  width: 169px;
+  width: 12%;
   height: 63px;
   border-radius: 50px;
   background: #fff;
@@ -328,9 +333,10 @@ body {
   color: #6d8e96;
   text-align: center;
   margin: 20px;
+  max-width: 160px;
 }
 .selected_button {
-  width: 169px;
+  width: 12%;
   height: 63px;
   border-radius: 50px;
   background: #d9f4ee;
@@ -344,24 +350,26 @@ body {
   line-height: 55px;
   text-align: center;
   margin: 20px;
+  max-width: 160px;
 }
 .select-item-main {
+  position: relative;
   width: 100%;
   height: 40%;
   margin: 5% 0 5% 3%;
   display: flex;
   flex-wrap: wrap;
-  flex-shrink: 0;
 }
 .select-title
 {
-   width: 169px;
+   width: 12%;
    height: 63px;
    line-height: 63px;
    font-size: 30px;
    color: #9e9e9e;
    text-align: center;
    margin-top:20px;
+   max-width: 160px;
 }
 .select-hzau-img
 {
@@ -376,5 +384,68 @@ body {
   float: right;
   margin: 30px 30px 0 0;
 }
+
+.select-type {
+  position: absolute;
+  top: 140px;
+  left: 30px;
+}
+
+.select-type select{
+  -webkit-appearance: none;
+  padding: 7px 40px 7px 12px;
+  width: 200px;
+  height: 50px;
+  border: 1px solid #e8eaed;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px -2px #9098a9;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 150ms ease;
+}
+
+.select-type select:required:invalid {
+  color: #5a667f;
+}
+
+.select-type select option{
+  font-size: 20px;
+}
+.select-type select option[value=""][disabled] {
+  display: none;
+}
+.select-type select:focus {
+  outline: none;
+  border-color: #96b5bd;
+  box-shadow: 0 0 0 2px rgba(0,119,255,0.2);
+}
+
+
+.select-input {
+  position: absolute;
+  top: 130px;
+  right: 200px;
+  color: #96b5bd;
+  
+}
+.select-input span{
+  font-size: 30px;
+  margin-top: 10px;
+  height: 60px;
+  line-height: 60px;
+  margin-right: 10px;
+}
+.select-input input{
+  vertical-align: super;
+  width: 120px;
+  outline: none;
+  border-radius: 12px;
+  border: #96b5bd 2px solid;
+  padding-left: 10px;
+  height: 40px;
+  font-size: 14px;
+}
+
+
 
 </style>
