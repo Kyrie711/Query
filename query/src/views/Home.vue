@@ -27,16 +27,16 @@
       />
       <div class="select-item-main">
         <div class="select-title">Source:</div>
-        <div v-bind:class="{ select_button: !select_state.cms, selected_button: select_state.cms }">CMS</div>
-        <div v-bind:class="{ select_button: !select_state.vms, selected_button: select_state.vms }">VMS</div>
-        <div v-bind:class="{ select_button: !select_state.promis, selected_button: select_state.promis }">Promis</div>
-        <div v-bind:class="{ select_button: !select_state.lei, selected_button: select_state.lei }">LEI</div>
-        <div v-bind:class="{ select_button: !select_state.hdfs, selected_button: select_state.hdfs }">>HDFS</div>
+        <div @click="changestate(1,$event)" v-bind:class="{ select_button: !select_state[0].CMS, selected_button: select_state[0].CMS }">CMS</div>
+        <div @click="changestate(2,$event)" v-bind:class="{ select_button: !select_state[1].VMS, selected_button: select_state[1].VMS }">VMS</div>
+        <div @click="changestate(3,$event)" v-bind:class="{ select_button: !select_state[2].Promis, selected_button: select_state[2].Promis }">Promis</div>
+        <div @click="changestate(4,$event)" v-bind:class="{ select_button: !select_state[3].LEI, selected_button: select_state[3].LEI }">LEI</div>
+        <div @click="changestate(5,$event)" v-bind:class="{ select_button: !select_state[4].HDFS, selected_button: select_state[4].HDFS }">HDFS</div>
         <div class="select-title">Type:</div>
-        <div v-bind:class="{ select_button: !select_state.person, selected_button: select_state.person }">Person</div>
-        <div v-bind:class="{ select_button: !select_state.location, selected_button: select_state.location }">Location</div>
-        <div v-bind:class="{ select_button: !select_state.case, selected_button: select_state.case }">Case</div>
-        <div v-bind:class="{ select_button: !select_state.typeAll, selected_button: select_state.typeAll }">All</div>
+        <div @click="changestate(6,$event)" v-bind:class="{ select_button: !select_state[5].Person, selected_button: select_state[5].Person }">Person</div>
+        <div @click="changestate(7,$event)" v-bind:class="{ select_button: !select_state[6].Location, selected_button: select_state[6].Location }">Location</div>
+        <div @click="changestate(8,$event)" v-bind:class="{ select_button: !select_state[7].Case, selected_button: select_state[7].Case }">Case</div>
+        <div @click="changestate(9,$event)" v-bind:class="{ select_button: !select_state[8].All, selected_button: select_state[8].All }">All</div>
       </div>
     </div>
     <div class="data-bar-wrapper">
@@ -61,20 +61,20 @@ export default {
   data() {
     return {
       select_main: false,
-      select_state: {
-        vms: false,
-        cms: false,
-        poler: false,
-        promis: false,
-        es: false,
-        lei: false,
-        hdfs: false,
-        obdasqlite: false,
-        person: false,
-        location: false,
-        case: false,
-        typeAll: false,
-      },
+      select_state:[
+        {CMS:false} ,
+        {VMS: false},
+        {Promis: false},
+        {LEI:false},
+        {HDFS:false},
+        {Person: false},
+        {Location:false},
+        {Case: false},
+        {All:false},                        
+        {poler: false},
+        {es:false},
+        {obdasqlite:false}
+      ],
       service: "",
       update: false,
       criteria: {},
@@ -82,12 +82,33 @@ export default {
     };
   },
   methods: {
-    openselect(event) {
+    openselect(){
       this.select_main = !this.select_main;
-      console.log(event.target)
     },
-    changestate(event){
-      console.log(event.target)
+    changestate(data,e){
+      let target=e.target.innerHTML;
+      console.log(target);
+      for(let i=1;i<=9;i++)
+      {
+      if(data==i)
+      {
+        this.select_state[i-1][target]=!this.select_state[i-1][target];
+      }
+      }
+
+      // else if(data==2)
+      // {
+      //   this.select_state.vms=!this.select_state.vms;
+      // }
+      // else if(data==3)
+      // {
+      //   this.select_state.promis=!this.select_state.promis;
+      // }
+      // else if(data==4)
+      // {
+      // this.select_state.vms=!this.select_state.vms
+      // }
+
     }
   },
   components: {
@@ -316,7 +337,7 @@ body {
   box-sizing: border-box;
   border: 2px solid #96b5bd;
   font-size: 26px;
-  font-weight: bold;
+  font-weight: normal;
   line-height: 34px;
   letter-spacing: 0em;
   color: #6d8e96;
