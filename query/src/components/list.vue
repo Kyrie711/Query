@@ -190,12 +190,14 @@ export default {
     display: flex;
     width: 50vw;
     margin: 0 auto;
+    flex-wrap: wrap;
 }
 .info {
     text-align: center;
     font-size: 24px;
-    flex: 1;
     line-height: 40px;
+    flex: 1;
+    min-width: 200px;
 }
 
 .info_header {
