@@ -69,11 +69,13 @@
         <div></div>
       </div>
     </div>
+    <List></List>
   </div>
 </template>
 
 <script>
 import TopBar from "../components/TopBar.vue";
+import List from '../components/list.vue';
 export default {
   data() {
     return {
@@ -116,6 +118,7 @@ export default {
   },
   components: {
     TopBar,
+    List,
   },
 };
 </script>
@@ -128,7 +131,6 @@ body {
 * {
   margin: 0;
   padding: 0;
-
 }
 
 .banner {
@@ -162,7 +164,7 @@ body {
   left: 50%;
   transform: translateX(-50%);
   top: 206px;
-  width: 1240px;
+  width: 70vw;
   height: 85px;
   border-radius: 10px;
   background: #ffffff;
@@ -219,10 +221,8 @@ body {
 }
 
 .banner .serch-bar .serch {
-  /* search-eye-fill */
-  position: absolute;
-  left: 1163px;
-  top: 22px;
+  float: right;
+  margin: 25px;
   width: 37px;
   height: 37px;
 }
@@ -232,24 +232,22 @@ body {
 }
 
 .data-bar-wrapper {
-  margin-left: -8px;
   position: absolute;
   top: 456px;
   width: 100%;
+  background: #f6f6f6;
 }
 
 .data-bar-wrapper .data-bar {
-  /* position: absolute; */
  
-  width: 1240px;
+  width: 70vw;
   margin: 0 auto;
-  left: 50%;
   height: 1000px;
-
+ 
 }
 
 .data-bar-wrapper .data-bar .data-bar-top {
-  position: absolute;
+  position: relative;
 }
 
 .data-bar-wrapper .data-bar .data-bar-top .data-left img {
@@ -286,7 +284,7 @@ body {
 .data-bar-wrapper .data-bar .data-bar-top .data-right {
   /* Found100matchesin63ms */
   position: absolute;
-  left: 820px;
+  right: 30px;
   top: 80px;
   width: 380px;
   height: 34px;
