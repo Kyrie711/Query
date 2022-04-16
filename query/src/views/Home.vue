@@ -209,7 +209,7 @@ body {
   position: absolute;
   left: 225px;
   top: 25px;
-  width: 306px;
+  width: 906px;
   height: 33px;
   font-family: SourceHanSansCN-ExtraLight;
   font-size: 24px;
