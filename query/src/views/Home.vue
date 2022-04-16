@@ -165,6 +165,7 @@ body {
   transform: translateX(-50%);
   top: 206px;
   width: 70vw;
+  min-width: 720px;
   height: 85px;
   border-radius: 10px;
   background: #ffffff;
@@ -209,7 +210,7 @@ body {
   position: absolute;
   left: 225px;
   top: 25px;
-  width: 906px;
+  width: 43vw;
   height: 33px;
   font-family: SourceHanSansCN-ExtraLight;
   font-size: 24px;
