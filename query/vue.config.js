@@ -17,6 +17,14 @@ module.exports = {
       }
       // '/query': 'http://localhost:8091'
     },
-  }
+  },
+  chainWebpack: config => {
+    config
+      .plugin('html')
+      .tap(args => {
+        args[0].title= '联邦查询';
+        return args
+      })
+  },
 }
  
