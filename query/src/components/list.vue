@@ -27,6 +27,7 @@
                     <div class="info_header">{{name}}</div>
                     <div class="info_body">{{value}}</div>
                 </div>
+                
             </div>
         </div>
         <div class="vis" v-show="vis">
