@@ -3,78 +3,78 @@
       <div class="bg" v-show="table"></div>
       <div class="bg" v-show="vis"></div>
       <div class="list_content">
-        <div class="list_one">
-            <div >
-            <img class="list_one_state_icon" src="../assets/increase.png">
-            </div>
-            <div class="list_one_gname">GeneName:11LL</div>
-            <div class="list_one_microname">demo:demo</div>
-            <div class="list_button">
-                    <div class="list_button_table" @click="openTable">Table</div>
-                    <div class="list_button_vis" @click="openVis">Vis</div>
-            </div>
-        </div>
-        </div>
-        <div class="table" v-show="table">
-            <img src="../assets/hzau_logo.jpg" class="select-hzau-img">
-            <img
-                @click="openTable"
-                src="../assets/cancel.png"
-                class="cancel-icon"
-            />
-            <div class="info_bar">
-                <div v-for="(value, name) in temporary" :key="name" class="info">
-                    <div class="info_header">{{name}}</div>
-                    <div class="info_body">{{value}}</div>
+        <div v-for="(item, index) in info.payload" :key="index">
+            <div class="list_one">
+                <div >
+                <img v-if="item.MicrobiotaAlteration == 'increase'" class="list_one_state_icon" src="../assets/increase.png">
+                <img v-if="item.MicrobiotaAlteration == 'decrease'" class="list_one_state_icon" src="../assets/decrease.png">
+                </div>
+                <div class="list_all">
+                    <div class="list_one_gname" v-if="names.includes('GeneName')">GeneName: {{item.GeneName}}</div>
+                    <div class="list_one_ma" v-if="names.includes('MetaboliteName')">MetaboliteName: {{item.MetaboliteName}}</div>
+                    <div class="list_one_microname" v-if="names.includes('MicrobiotaName')">MicrobiotaName: {{item.MicrobiotaName}}</div>
+                </div>
+                <div class="list_button">
+                        <div class="list_button_table" @click="openTable(index)">Tab</div>
+                        <div class="list_button_vis" @click="openVis">Fig</div>
                 </div>
                 
             </div>
         </div>
-        <div class="vis" v-show="vis">
-            <img
-                @click="openVis"
-                src="../assets/cancel.png"
-                class="cancel-icon"
-            />
+      </div>
+    <!--  弹出层-->
+    <div>
+        <div class="table" v-show="table">
+        <img src="../assets/hzau_logo.jpg" class="select-hzau-img">
+        <img
+            @click="openTable"
+            src="../assets/cancel.png"
+            class="cancel-icon"
+        />
+        <div class="info_bar">
+            <div v-for="(value, name) in temporary" :key="name" class="info">
+                <div class="info_header">{{name}}</div>
+                <div class="info_body">{{value}}</div>
+            </div>
         </div>
     </div>
+    <div class="vis" v-show="vis">
+        <img
+            @click="openVis"
+            src="../assets/cancel.png"
+            class="cancel-icon"
+        />
+    </div>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
+    props: ['list','names'],
     data() {
         return {
             table: false,
             vis: false,
-            temporary: {GeneName: "Arg1", MicrobiotaAlteration: "increase", MicrobiotaName: "Lactobacillus"},
+            temporary: '',
             info: {
                 info: {
                     hits: 10, // 结果数
                     runtime: 2635, // 查询时间
                 },
-                payload: [
-                    {GeneName: "Arg1", MicrobiotaAlteration: "increase", MicrobiotaName: "Lactobacillus"},
-                    {GeneName: "IL22", MicrobiotaAlteration: "increase", MicrobiotaName: "Lactobacillus"},
-                    {GeneName: "MAPK14", MicrobiotaAlteration: "increase", MicrobiotaName: "Lactobacillus"},
-                    {GeneName: "Tjp1", MicrobiotaAlteration: "increase", MicrobiotaName: "Lactobacillus"},
-                    {GeneName: "Angptl4", MicrobiotaAlteration: "increase", MicrobiotaName: "Akkermansia muciniphila"},
-                    {GeneName: "Arnt2", MicrobiotaAlteration: "increase", MicrobiotaName: "Akkermansia muciniphila"},
-                    {GeneName: "Arntl", MicrobiotaAlteration: "increase", MicrobiotaName: "Akkermansia muciniphila"},
-                    {GeneName: "Atf4", MicrobiotaAlteration: "increase", MicrobiotaName: "Akkermansia muciniphila"},
-                    {GeneName: "Bach1", MicrobiotaAlteration: "increase", MicrobiotaName: "Akkermansia muciniphila"},
-                    {GeneName: "Brca1", MicrobiotaAlteration: "increase", MicrobiotaName: "Akkermansia muciniphila"}
-                ]
+                payload: this.list
             }
         }
     },
     methods: {
-        openTable() {
+        openTable(index) {
             this.table = !this.table;
+            this.temporary = this.info.payload[index]
         },
         openVis() {
             this.vis = !this.vis;
         }
-    }
+    },
 }
 </script>
 
@@ -84,6 +84,7 @@ export default {
     width: 100%;
     position: absolute;
     top:620px;
+    background-color: #f6f6f6;
 }
 .list_one
 {
@@ -93,9 +94,20 @@ export default {
     background: #ffffff;
     border-radius: 20px;
     position: relative;
+    margin-bottom: 20px;
 }
+
+.list_all {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 125px;
+    padding: 10px 0;
+}
+
 .list_one_state_icon
-{
+{   
+
      width: 123px;
      height: 123px;
      position: absolute;
@@ -104,23 +116,30 @@ export default {
 }
 .list_one_gname
 {
-    position: absolute;
-    top: 30px;
-    left: 170px;
-    font-size: 30px;
+
+    margin-left: 170px;
+    font-size: 22px;
     color: #9E9E9E;
     letter-spacing: 1px;
-    display: block;
+
+}
+.list_one_ma
+{
+
+    margin-left: 170px;
+    font-size: 22px;
+    color: #9E9E9E;
+    letter-spacing: 1px;
+
 }
 .list_one_microname
 {
-    position: absolute;
-    top: 75px;
-    left: 170px;
-    font-size: 30px;
+
+    margin-left: 170px;
+    font-size: 22px;
     color: #9E9E9E;
     letter-spacing: 1px;
-    display: block;
+
 
 }
 .list_button
@@ -159,7 +178,7 @@ export default {
     z-index: 999;
     background: #ffffff;
     margin: 0 auto;
-    position: absolute;
+    position: fixed;
     left: 15%;
     top: 20%;
     border-radius: 10px;
@@ -215,7 +234,7 @@ export default {
     z-index: 999;
     background: #ffffff;
     margin: 0 auto;
-    position: absolute;
+    position: fixed;
     left: 15%;
     top: 20%;
     border-radius: 10px;
