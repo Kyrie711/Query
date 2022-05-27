@@ -519,7 +519,7 @@ body {
 .rotate-animate {
       position: absolute;
       top:720px;
-      left: 50%;
+      left: 47%;
       transform: translateX(-50%);
       border:10px solid #f3f3f3;
       border-radius:50%;

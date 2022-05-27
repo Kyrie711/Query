@@ -44,12 +44,14 @@
             src="../assets/cancel.png"
             class="cancel-icon"
         />
+        <Charts></Charts>
     </div>
     </div>
   </div>
 </template>
 
 <script>
+import Charts from './charts.vue';
 export default {
     props: ['list','names'],
     data() {
@@ -75,6 +77,7 @@ export default {
             this.vis = !this.vis;
         }
     },
+    components:{Charts}
 }
 </script>
 
@@ -236,10 +239,10 @@ export default {
     margin: 0 auto;
     position: fixed;
     left: 15%;
-    top: 20%;
+    top: 12%;
     border-radius: 10px;
-    min-height: 500px;
-    background-image: url('../assets/vis.png');
+    min-height: 700px;
+    /* background-image: url('../assets/vis.png'); */
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
