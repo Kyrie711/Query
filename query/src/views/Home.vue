@@ -156,7 +156,7 @@ export default {
           control:{
             operation: this.selected, // 需要⻚⾯传值
             sources: sources // 需要⻚⾯传值
-          }, 
+          }, //?(MicrobiotaName, MetaboliteName):- relationship:has_disorder_effect_results(MicrobiotaName, Index, <ColorectalCancer>),attribute:disorder_expression_alteration_caused_by_microbiota(Index, <increase>),attribute:microbiota_disorder_interaction_host_type(Index, <human>),relationship:generates(MicrobiotaName, MetaboliteName).
           credentials:{
             credentiallist:[
               {gutmdisorder:{username:"root",password:"password"}},
