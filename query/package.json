@@ -17,6 +17,7 @@
     "@vue/cli-plugin-babel": "~4.5.15",
     "@vue/cli-plugin-router": "~4.5.15",
     "@vue/cli-service": "~4.5.15",
+    "element-ui": "^2.15.8",
     "vue-template-compiler": "^2.6.11"
   }
 }
