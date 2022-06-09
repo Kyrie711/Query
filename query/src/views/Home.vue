@@ -113,9 +113,9 @@ export default {
       criteria: {},
       data: null,
       selected: "",
-      limit: '',
-      runtime: '',
-      length: '',
+      limit: '8',
+      runtime: '10',
+      length: '8',
       names: '',
       query: ''
     };
@@ -156,7 +156,7 @@ export default {
           control:{
             operation: this.selected, // 需要⻚⾯传值
             sources: sources // 需要⻚⾯传值
-          }, 
+          }, //?(MicrobiotaName, MetaboliteName):- relationship:has_disorder_effect_results(MicrobiotaName, Index, <ColorectalCancer>),attribute:disorder_expression_alteration_caused_by_microbiota(Index, <increase>),attribute:microbiota_disorder_interaction_host_type(Index, <human>),relationship:generates(MicrobiotaName, MetaboliteName).
           credentials:{
             credentiallist:[
               {gutmdisorder:{username:"root",password:"password"}},
@@ -166,23 +166,35 @@ export default {
         }
       }
       query = JSON.stringify(query)
+      // request({
+      //   method: 'post',
+      //   url: '/query',
+      //   data: query
+      // }).then(res => {
+      //   console.log(res)
+      //   this.post = res.data.payload
+      //   this.runtime = res.data.info.runtime
+      //   this.names = Object.keys(this.post[0])
+
+
+      //   this.length = this.post.length
+      //   this.ifPost = true
+      //   this.anim = false
+        
+      // }).catch(err => {
+      //   console.log(err)
+      // })
+
+      // 写死
       request({
-        method: 'post',
         url: '/query',
-        data: query
       }).then(res => {
         console.log(res)
-        this.post = res.data.payload
-        this.runtime = res.data.info.runtime
-        this.names = Object.keys(this.post[0])
+        this.post = res.data
 
-
-        this.length = this.post.length
         this.ifPost = true
         this.anim = false
-        
-      }).catch(err => {
-        console.log(err)
+        this.names = Object.keys(this.post[0])
       })
     }
   },

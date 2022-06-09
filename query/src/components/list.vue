@@ -6,13 +6,13 @@
         <div v-for="(item, index) in info.payload" :key="index">
             <div class="list_one">
                 <div >
-                <img v-if="item.MicrobiotaAlteration == 'increase'" class="list_one_state_icon" src="../assets/increase.png">
-                <img v-if="item.MicrobiotaAlteration == 'decrease'" class="list_one_state_icon" src="../assets/decrease.png">
+                <img v-if="item.Alteration_microbiota == 'increase'" class="list_one_state_icon" src="../assets/increase.png">
+                <img v-if="item.Alteration_microbiota == 'decrease'" class="list_one_state_icon" src="../assets/decrease.png">
                 </div>
-                <div class="list_all">
-                    <div class="list_one_gname" v-if="names.includes('GeneName')">GeneName: {{item.GeneName}}</div>
-                    <div class="list_one_ma" v-if="names.includes('MetaboliteName')">MetaboliteName: {{item.MetaboliteName}}</div>
-                    <div class="list_one_microname" v-if="names.includes('MicrobiotaName')">MicrobiotaName: {{item.MicrobiotaName}}</div>
+                <div class="list_all"> 
+                    <div class="list_one_gname" v-if="names.includes('Disorder')">Disorder: {{item.Disorder}}</div>
+                    <!-- <div class="list_one_ma" v-if="names.includes('Alteration_microbiota')">Alteration_microbiota: {{item.Alteration_microbiota}}</div> -->
+                    <div class="list_one_microname" v-if="names.includes('Gene')">Gene: {{item.Gene}}</div>
                 </div>
                 <div class="list_button">
                         <div class="list_button_table" @click="openTable(index)">Tab</div>
@@ -70,6 +70,7 @@ export default {
     },
     methods: {
         openTable(index) {
+            console.log(this.info.payload)
             this.table = !this.table;
             this.temporary = this.info.payload[index]
         },
