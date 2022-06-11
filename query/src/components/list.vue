@@ -52,7 +52,8 @@
 
 <template>
 <div>
-    <el-button type="primary" class="ipt">Fig</el-button>
+    <el-button type="primary" class="ipt" @click="openVis">Fig</el-button>
+    <div class="bg" v-show="vis"></div>
     <el-table class="list_content"
     :data="info.payload"
     stripe
@@ -82,6 +83,14 @@
       label="Gene">
     </el-table-column>
   </el-table>
+  <div class="vis" v-show="vis">
+        <img
+            @click="openVis"
+            src="../assets/cancel.png"
+            class="cancel-icon"
+        />
+        <Charts></Charts>
+    </div>
 </div>
   
 </template>
