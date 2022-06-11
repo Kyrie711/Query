@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div>
       <div class="bg" v-show="table"></div>
       <div class="bg" v-show="vis"></div>
@@ -6,22 +6,23 @@
         <div v-for="(item, index) in info.payload" :key="index">
             <div class="list_one">
                 <div >
-                <img v-if="item.MicrobiotaAlteration == 'increase'" class="list_one_state_icon" src="../assets/increase.png">
-                <img v-if="item.MicrobiotaAlteration == 'decrease'" class="list_one_state_icon" src="../assets/decrease.png">
+                <img v-if="item.Alteration_microbiota == 'increase'" class="list_one_state_icon" src="../assets/increase.png">
+                <img v-if="item.Alteration_microbiota == 'decrease'" class="list_one_state_icon" src="../assets/decrease.png">
                 </div>
-                <div class="list_all">
-                    <div class="list_one_gname" v-if="names.includes('GeneName')">GeneName: {{item.GeneName}}</div>
-                    <div class="list_one_ma" v-if="names.includes('MetaboliteName')">MetaboliteName: {{item.MetaboliteName}}</div>
-                    <div class="list_one_microname" v-if="names.includes('MicrobiotaName')">MicrobiotaName: {{item.MicrobiotaName}}</div>
+                <div class="list_all"> 
+                    <div class="list_one_gname" v-if="names.includes('Disorder')">Disorder: {{item.Disorder}}</div>
+                    <div class="list_one_ma" v-if="names.includes('Alteration_microbiota')">Alteration_microbiota: {{item.Alteration_microbiota}}</div>
+                    <div class="list_one_microname" v-if="names.includes('Gene')">Gene: {{item.Gene}}</div>
                 </div>
                 <div class="list_button">
                         <div class="list_button_table" @click="openTable(index)">Tab</div>
                         <div class="list_button_vis" @click="openVis">Fig</div>
                 </div>
+                
             </div>
         </div>
       </div>
-    <!--  弹出层-->
+    
     <div>
         <div class="table" v-show="table">
         <img src="../assets/hzau_logo.jpg" class="select-hzau-img">
@@ -43,12 +44,50 @@
             src="../assets/cancel.png"
             class="cancel-icon"
         />
+        <Charts></Charts>
     </div>
     </div>
   </div>
+</template> -->
+
+<template>
+<div>
+    <el-button type="primary" class="ipt">Fig</el-button>
+    <el-table class="list_content"
+    :data="info.payload"
+    stripe
+    style="width: 70%">
+    <el-table-column
+      prop="Disorder"
+      label="Disorder"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="Alteration_microbiota"
+      label="Alteration_microbiota"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="Microbita"
+      label="Microbita"
+       width="180">
+    </el-table-column>
+    <el-table-column
+      prop="Alteration_gene"
+      label="Alteration_gene"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="Gene"
+      label="Gene">
+    </el-table-column>
+  </el-table>
+</div>
+  
 </template>
 
 <script>
+import Charts from './charts.vue';
 export default {
     props: ['list','names'],
     data() {
@@ -67,6 +106,7 @@ export default {
     },
     methods: {
         openTable(index) {
+            console.log(this.info.payload)
             this.table = !this.table;
             this.temporary = this.info.payload[index]
         },
@@ -74,16 +114,27 @@ export default {
             this.vis = !this.vis;
         }
     },
+    components:{Charts}
 }
 </script>
 
 <style>
+.ipt {
+    position: absolute;
+    top:540px;
+    right: 300px;
+}
+
 .list_content
 {
-    width: 100%;
+    /* width: 100%; */
     position: absolute;
     top:620px;
     background-color: #f6f6f6;
+    left: 50%;
+    right: 0;
+    transform: translateX(-50%);
+    /* right: 200px; */
 }
 .list_one
 {
@@ -235,10 +286,10 @@ export default {
     margin: 0 auto;
     position: fixed;
     left: 15%;
-    top: 20%;
+    top: 12%;
     border-radius: 10px;
-    min-height: 500px;
-    background-image: url('../assets/vis.png');
+    min-height: 700px;
+    /* background-image: url('../assets/vis.png'); */
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;

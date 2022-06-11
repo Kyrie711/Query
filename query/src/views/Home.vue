@@ -70,7 +70,7 @@
             <p>List of data</p>
             <div></div>
           </div>
-          <div class="data-right" v-if="ifPost">Found {{length}} matches in {{runtime}}ms</div>
+          <!-- <div class="data-right" v-if="ifPost">Found {{length}} matches in {{runtime}}ms</div> -->
         </div>
         <div></div>
       </div>
@@ -166,23 +166,35 @@ export default {
         }
       }
       query = JSON.stringify(query)
+      // request({
+      //   method: 'post',
+      //   url: '/query',
+      //   data: query
+      // }).then(res => {
+      //   console.log(res)
+      //   this.post = res.data.payload
+      //   this.runtime = res.data.info.runtime
+      //   this.names = Object.keys(this.post[0])
+
+
+      //   this.length = this.post.length
+      //   this.ifPost = true
+      //   this.anim = false
+        
+      // }).catch(err => {
+      //   console.log(err)
+      // })
+
+      // 写死
       request({
-        method: 'post',
         url: '/query',
-        data: query
       }).then(res => {
-        console.log(res)
-        this.post = res.data.payload
-        this.runtime = res.data.info.runtime
-        this.names = Object.keys(this.post[0])
+        console.log(res.data)
+        this.post = res.data
 
-
-        this.length = this.post.length
         this.ifPost = true
         this.anim = false
-        
-      }).catch(err => {
-        console.log(err)
+        this.names = Object.keys(this.post[0])
       })
     }
   },
@@ -519,7 +531,7 @@ body {
 .rotate-animate {
       position: absolute;
       top:720px;
-      left: 50%;
+      left: 47%;
       transform: translateX(-50%);
       border:10px solid #f3f3f3;
       border-radius:50%;
