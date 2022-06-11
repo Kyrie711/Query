@@ -113,9 +113,9 @@ export default {
       criteria: {},
       data: null,
       selected: "",
-      limit: '',
-      runtime: '',
-      length: '',
+      limit: '8',
+      runtime: '10',
+      length: '8',
       names: '',
       query: ''
     };
