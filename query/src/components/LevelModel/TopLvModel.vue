@@ -1,28 +1,37 @@
-<!--  -->
+<!-- 顶级选择模块 -->
 <template>
   <div>
-    <div class="sm-top" @click="isShow=!isShow">肠道微生物</div>
+    <div class="sm-top" @click="toggleShow">
+      {{owlName}}
+      <span class="iconfont icon-arrow-right-filling" @click.stop="run" ></span>
+    </div>
     <el-collapse-transition>
       <div v-show="isShow" id="showBanner">
         <div class="benti-ipt">
-        <span>选择影响本体的因素 </span>
-        <el-autocomplete
-        class="inline-input"
-        v-model="state1"
-        :fetch-suggestions="querySearch"
-        placeholder="请输入内容"
-        @select="handleSelect"
-      ></el-autocomplete>
+          <div class="block">
+            <span class="demonstration">选择影响因素 </span>
+            <el-cascader
+              v-model="sl1"
+              :options="options1"
+              :props="{ checkStrictly: true }"
+              clearable></el-cascader>
+          </div>
       </div>
       <div class="benti-ipt">
-        <span>选择影响基因的因素 </span>
-        <el-autocomplete
-        class="inline-input"
-        v-model="state2"
-        :fetch-suggestions="querySearch"
-        placeholder="请输入内容"
-        @select="handleSelect"
-      ></el-autocomplete>
+          <div class="block">
+            <span class="demonstration">选择被影响因素 </span>
+            <el-cascader
+              v-model="sl2"
+              :options="options2"
+              :props="{ checkStrictly: true }"
+              clearable></el-cascader>
+          </div>
+      </div>
+      <div class="benti-ipt">
+        <el-checkbox-group v-model="checkList">
+          <el-checkbox label="代谢物"></el-checkbox>
+          <el-checkbox label="参与kegg"></el-checkbox>
+        </el-checkbox-group>
       </div>
       </div>
     </el-collapse-transition>
@@ -30,50 +39,70 @@
 </template>
 
 <script>
+import option from "../../Data/option.json"
+import {request} from "../../network/request"
 export default {
-  name:"TopLvModel",
+  name: "TopLvModel",
+  props: {
+    owlName: {
+      type: String,
+      default:"本体"
+    }
+  },
   data () {
     return {
-      restaurants:[],
-      state1:"",
-      state2:"",
-      isShow:false
+      options1:"",
+      options2:"",
+      isShow: false,
+      checkList: [],
+      sl1: [],
+      sl2:[]
     };
   },
   methods: {
-    querySearch(queryString, cb) {
-        var restaurants = this.restaurants;
-        var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
-        // 调用 callback 返回建议列表的数据
-        cb(results);
-      },
-    createFilter(queryString) {
-        return (restaurant) => {
-          return (restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
-        };
-      },
+    /**
+     * 获取所有数据
+     * */ 
     loadAll(){
-      return[
-        {"value":"Food"},
-        {"value":"Drug"},
-        {"value":"Disorder"},
-        {"value":"Gut_Microbiota"},
-        {"value":"Metabolte"},
-        {"value":"Disorder"},
-        {"value":"A"},
-        {"value":"B"},
-        {"value":"C"},
-        {"value":"D"},
-        {"value":"E"},
-        {"value":"F"},
-      ]
+      return option
     },
-    handleSelect(item) {
-        console.log(item);
+    /**
+     * 点击切换 展示/隐藏效果*/ 
+    toggleShow() {
+      this.isShow = !this.isShow;
+    },
+    /**
+     * 生成datalog语句
+     * */ 
+    run() {
+      // 输入为空不执行
+      if (this.sl1.length < 1 || this.sl2.length < 1) {
+        return
+      }
+      let source = this.sl1[this.sl1.length - 1];
+      let target = this.sl2[this.sl2.length - 1];
+      let datalog = `?(gut_microbiota_name, microbiota_alteration_caused_by_disorder,gene_symbol, gene_expression_alteration_caused_by_microbiota):-
+      relationship: has_abundance_change_results_by_disorder(gut_microbiota_name,disorder_microbiota_index, ${source}).
+      attribute: disorder_microbiota_host_type(disorder_microbiota_index, ${target}).
+      attribute: microbiota_alteration_cuased_by_disorder(disorder_microbiota_index, microbiota_alteration_caused_by_disorder).
+      relationship: has_expression_change_results_by_microbiota(gene_symbol, microbiota_gene_index, gut_microbiota_name).
+      attribute:gene_expression_alteration_caused_by_microbiota(microbiota_gene_index, gene_expression_alteration_caused_by_microbiota).`
+      console.log(datalog);
+      request({
+        url: '/query',
+      }).then(res => {
+        console.log(res.data)
+        this.post = res.data
+
+        this.ifPost = true
+        this.anim = false
+        this.names = Object.keys(this.post[0])
+      })
     }
   },
   mounted(){
-    this.restaurants = this.loadAll();
+    this.options1 = this.loadAll()[1]["IF"];
+    this.options2 = this.loadAll()[2]["AF"];
   },
 }
 
@@ -86,7 +115,14 @@ export default {
   background-color: #eeeeee;
   box-shadow: 2px 2px 2px rgba(0,0,0,.5);
 }
-
+.sm-top span{
+  width: 40px;
+  height: 100%;
+  float: right;
+}
+.sm-top span:hover{
+  cursor: pointer;
+}
 .benti-ipt{
   background-color: #eeeeee;
   margin-left: 50px;
@@ -96,6 +132,12 @@ export default {
 }
 .benti-ipt:hover{
   background-color: #dddddd;
+}
+.benti-ipt .block{
+  margin-left: 10px;
+}
+.benti-ipt .el-checkbox-group{
+  margin-left: 10px
 }
 #showBanner{
   height: 100px;

@@ -1,10 +1,9 @@
-<!--  -->
+<!-- 选择模块 -->
 <template>
   <div class="sm-main">
     <div id="sm-close" @click="closeSM()" class="iconfont icon-close"></div>
-    <top-lv-model class="first top-lv-model"></top-lv-model>
-    <top-lv-model class="top-lv-model"></top-lv-model>
-    <top-lv-model class="top-lv-model"></top-lv-model>
+    <top-lv-model class="first top-lv-model" :owlName="name1" ref="tlm"></top-lv-model>
+
   </div>
 </template>
 
@@ -14,11 +13,14 @@ export default {
   name:"SelectModel",
   data () {
     return {
+      name1: "肠道微生物",
+      isShow:false
     };
   },
   methods:{
     closeSM(){
-      this.$emit("closeClick",false)
+      this.$emit("closeClick", false)
+      this.$refs.tlm.toggleShow()
     }
   },
   components:{

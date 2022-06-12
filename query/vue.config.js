@@ -9,7 +9,8 @@ module.exports = {
     hotOnly: false, //是否开启热更新
     proxy: {
       '/api': {
-        target: 'http://172.16.6.158:8091', //API服务器的地址
+        // target: 'http://192.168.43.27:8091', //API服务器的地址
+        target: 'http://localhost:9000', //写死
         changeOrigin: true,
         pathRewrite: {
           '^/api': '' // 重写路径，因为后端没有/api，所以在识别的时候会把/api替换成''

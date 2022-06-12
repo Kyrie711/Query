@@ -27,5 +27,6 @@
 
 .icon-arrow-right-filling:before {
   content: "\e688";
+  color: green;
 }
 

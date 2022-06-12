@@ -7,13 +7,10 @@
 <script>
 export default {
   name: "Charts",
-  methods: {
-    drawChart() {
-    var chartDom = document.getElementById("main");
-    var myChart = this.$echarts.init(chartDom);
-    var option;
-
-    option = {
+    data(){
+    return{
+      
+    option : {
       title: {
         text: "Fig",
       },
@@ -30,82 +27,190 @@ export default {
             show: true,
           },
           edgeSymbol: ["circle", "arrow"],
-          edgeSymbolSize: [4, 10],
+          edgeSymbolSize: [5, 10],
           edgeLabel: {
-            fontSize: 20,
+            fontSize: 13,
           },
           data: [
             {
-              name: "Node 1",
+              name: "colorectal cancer",
               x: 300,
-              y: 300,
-            },
-            {
-              name: "Node 2",
-              x: 800,
-              y: 300,
-            },
-            {
-              name: "Node 3",
-              x: 550,
               y: 100,
             },
             {
-              name: "Node 4",
+              name: "m1",
               x: 550,
-              y: 500,
+              y: 50,
             },
+            {
+              name:'m2',
+              x:550,
+              y:100,
+            },
+            {
+              name:"m3",
+              x:550,
+              y:150,
+            },
+            {
+              name: "g1",
+              x: 800,
+              y: 0,
+            },
+            {
+              name:"g2",
+              x:800,
+              y:50,
+            },
+
+            {
+              name:"g3",
+              x:800,
+              y:100,
+            },
+            {
+              name:"g4",
+              x:800,
+              y:150,
+            },
+
+            {
+              name:"g5",
+              x:800,
+              y:200,
+            }
           ],
           // links: [],
           links: [
             {
-              source: 0,
-              target: 1,
-              symbolSize: [5, 20],
+              source: 'colorectal cancer',
+              target: 'm1',
               label: {
-                show: true,
+                show: false,
               },
               lineStyle: {
-                width: 5,
-                curveness: 0.2,
-              },
+                curveness: 0,
+                color: "red", 
+              }
             },
             {
-              source: "Node 2",
-              target: "Node 1",
+              source: 'm1',
+              target: 'g1',
               label: {
-                show: true,
+                show: false,
               },
               lineStyle: {
-                curveness: 0.2,
+                curveness: 0,
+                color: "red",
               },
             },
             {
-              source: "Node 1",
-              target: "Node 3",
+              source: 'm1',
+              target: 'g2',
+              label: {
+                show: false,
+              },
+              lineStyle: {
+                curveness: 0,
+                color: "green",
+              },
             },
             {
-              source: "Node 2",
-              target: "Node 3",
+              source: 'colorectal cancer',
+              target: 'm2',
+              label: {
+                show: false,
+              },
+              lineStyle: {
+                curveness: 0,
+                color: "green",
+              },
             },
             {
-              source: "Node 2",
-              target: "Node 4",
+              source: 'm2',
+              target: 'g1',
+              label: {
+                show: false,
+              },
+              lineStyle: {
+                curveness: 0,
+                color: "green",
+              },
             },
             {
-              source: "Node 1",
-              target: "Node 4",
+              source: 'm2',
+              target: 'g3',
+              label: {
+                show: false,
+              },
+              lineStyle: {
+                curveness: 0,
+                color: "green",
+              },
+            },
+            {
+              source: 'm2',
+              target: 'g4',
+              label: {
+                show: false,
+              },
+              lineStyle: {
+                curveness: 0,
+                color: "red",
+              },
+            },
+            {
+              source:'colorectal cancer',
+              target:'m3',
+              label: {
+                show: false,
+              },
+              lineStyle: {
+                curveness: 0,
+                color: "red",
+              },
+            },
+            {
+              source: 'm3',
+              target: 'g1',
+              label: {
+                show: false,
+              },
+              lineStyle: {
+                curveness: 0,
+                color: "red",
+              },
+            },
+            {
+              source: 'm3',
+              target: 'g5',
+              label: {
+                show: false,
+              },
+              lineStyle: {
+                curveness: 0,
+                color: "green",
+              },
             },
           ],
           lineStyle: {
-            opacity: 0.9,
-            width: 2,
-            curveness: 0,
+            width: 4,
+            curveness: 0.2,
+          },
+          textStyle: {
+            fontSize: 20,
           },
         },
       ],
-    };
-
+    }
+ 
+    }
+  },
+  methods: {
+    drawChart() {
+    var chartDom = document.getElementById("main");
+    var myChart = this.$echarts.init(chartDom);
+    var option = this.option;
     option && myChart.setOption(option);
     }
   },
@@ -116,11 +221,11 @@ export default {
 </script>
 <style scoped>
 .charts_main {
-  width: 50vw;
-  height: 30vw;
+  width: 60vw;
+  height: 70vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 100px auto;
+  margin: 20px auto;
 }
 </style>
