@@ -10,7 +10,7 @@
       <!-- 查询框 -->
       <div class="serch-bar">
         <div @click="openselect($event)" class="option-bar">
-          <div class="option">选项</div>
+          <div class="option">option</div>
           <div class="arrow-bar">
             <img src="../assets/路径.png" />
           </div>
@@ -52,7 +52,7 @@
           <!-- <span>Selected: {{selected}}</span> -->
         </div>
         <div class="show-selectModel" @click="toggleShow(true)">
-          <span>选择模型</span>
+          <span>Select Template</span>
         </div>
         <div class="select-input">
           <span>limit:</span>

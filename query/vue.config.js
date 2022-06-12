@@ -23,9 +23,10 @@ module.exports = {
     config
       .plugin('html')
       .tap(args => {
-        args[0].title= '联邦查询';
+        args[0].title= 'The federated query';
         return args
       })
   },
+  publicPath:"./"
 }
  
