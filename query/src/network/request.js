@@ -2,7 +2,8 @@ import axios from 'axios'
 
 export function request(config) {
   const instance = axios.create({
-    baseURL: '/api',
+    // baseURL: '/api',
+    baseURL: 'api.codexx.cc:9000',
     timeout: 40000,
     headers: {
       'Content-Type': 'application/json;charset=UTF-8'
