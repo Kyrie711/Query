@@ -97,8 +97,8 @@
     {
         "AF": [
             {
-                "value": "gene",
-                "label": "gene",
+                "value": "Metabolite",
+                "label": "Metabolite",
                 "children": [{
                   "value": "DNA",
                   "label": "DNA"
@@ -108,8 +108,8 @@
                 }]
             },
             {
-                "value": "flora",
-                "label": "flora",
+                "value": "Gut_Microbiota",
+                "label": "Gut_Microbiota",
                 "children": [{
                   "value": "Firmicutes",
                   "label": "Firmicutes"

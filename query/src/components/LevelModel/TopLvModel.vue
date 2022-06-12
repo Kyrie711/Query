@@ -9,7 +9,7 @@
       <div v-show="isShow" id="showBanner">
         <div class="benti-ipt">
           <div class="block">
-            <span class="demonstration">选择影响因素 </span>
+            <span class="demonstration">选择影响微生物的因素 </span>
             <el-cascader
               v-model="sl1"
               :options="options1"
@@ -19,7 +19,7 @@
       </div>
       <div class="benti-ipt">
           <div class="block">
-            <span class="demonstration">选择被影响因素 </span>
+            <span class="demonstration">选择影响基因的因素 </span>
             <el-cascader
               v-model="sl2"
               :options="options2"
@@ -29,7 +29,7 @@
       </div>
       <div class="benti-ipt">
         <el-checkbox-group v-model="checkList">
-          <el-checkbox label="代谢物"></el-checkbox>
+          <el-checkbox label="生成代谢物"></el-checkbox>
           <el-checkbox label="参与kegg"></el-checkbox>
         </el-checkbox-group>
       </div>
@@ -92,11 +92,12 @@ export default {
         url: '/query',
       }).then(res => {
         console.log(res.data)
-        this.post = res.data
 
-        this.ifPost = true
-        this.anim = false
-        this.names = Object.keys(this.post[0])
+        // this.post = res.data
+
+        // this.ifPost = true
+        // this.anim = false
+        // this.names = Object.keys(this.post[0])
       })
     }
   },

@@ -13,7 +13,7 @@ export default {
   name:"SelectModel",
   data () {
     return {
-      name1: "肠道微生物",
+      name1: "q2",
       isShow:false
     };
   },
@@ -46,7 +46,7 @@ div{
 .sm-main{
   position: absolute;
   box-sizing: border-box;
-  background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(234,249,249) 0.1%, rgba(239,249,251) 90.1% );
+  background-color: #ffffff ;
   top: 10%;
   left: 25%;
   z-index: 1;
