@@ -15,7 +15,7 @@ module.exports = {
     //     pathRewrite: {
     //       '^/api': '' // 重写路径，因为后端没有/api，所以在识别的时候会把/api替换成''
     //     }
-    //   }
+    //   },
     //   // '/query': 'http://localhost:8091'
     // },
   },
