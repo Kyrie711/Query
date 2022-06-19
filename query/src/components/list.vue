@@ -57,7 +57,7 @@
     <el-table class="list_content"
     :data="info.payload"
     stripe
-    style="width: 70%">
+    style="width: 70%; font-size: 18px">
     <el-table-column
       prop="Disorder"
       label="Disorder"
