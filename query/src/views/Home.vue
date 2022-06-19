@@ -10,7 +10,12 @@
     ></select-model>
     <!-- 查询的容器 -->
     <div class="banner">
-      <div class="img"></div>
+      <div class="site_title">
+        GMFDP
+      </div>
+      <div class="small_title">
+        Gut Microbiota Federated Data Platform
+      </div>
       <!-- 查询框 -->
       <div class="serch-bar">
         <div @click="openselect($event)" class="option-bar">
@@ -22,7 +27,7 @@
         <input
           type="text"
           class="ipt"
-          placeholder="输入查询语句"
+          placeholder="Input Datalog"
           v-model="query"
         />
         <div class="serch">
@@ -100,12 +105,12 @@
               operation
             </option>
             <option value="knowledgeQuery">knowledgeQuery</option>
-            <option value="Two">Two</option>
+            <!-- <option value="Two">Two</option>
             <option value="Three">Three</option>
             <option value="Four">Four</option>
             <option value="Five">Five</option>
             <option value="Six">Six</option>
-            <option value="Seven">Seven</option>
+            <option value="Seven">Seven</option> -->
           </select>
           <!-- <span>Selected: {{selected}}</span> -->
         </div>
@@ -198,6 +203,7 @@ export default {
     onSearch() {
       this.btm = false;
       this.anim = true;
+      this.post = "";
       let sources = [];
       for (let item of this.select_state) {
         let ins = Object.keys(item)[0];
@@ -300,18 +306,7 @@ body {
   background: url("../assets/bg.png");
 }
 
-.banner .img {
-  /* 矩形 14 */
-  opacity: 0.6;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 45px;
-  width: 258px;
-  height: 126px;
-  border-radius: 10px;
-  background: url("../assets/矩形 14.png");
-}
+
 
 .banner .serch-bar {
   /* 矩形 4 */
@@ -642,5 +637,20 @@ body {
 }
 .show-selectModel:hover {
   color: blue;
+}
+.site_title{
+  position: absolute;
+  font-size: 58px;
+  right: 43%;
+  top: 60px;
+  color: #5a667f;
+}
+.small_title
+{
+  position: absolute;
+  font-size: 18px;
+  right: 39%;
+  bottom:195px;
+  color: #5a667f;
 }
 </style>

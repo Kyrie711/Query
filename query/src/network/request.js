@@ -22,7 +22,7 @@ import axios from 'axios'
 
 const _axios = axios.create({
   // baseURL: "http://api.codexx.cc:9000",
-  baseURL: "http://172.16.6.127:8091",
+  baseURL: "http://192.168.43.193:8091",
   // baseURL: "http://localhost:8091",
   timeout: 50000,
 })
