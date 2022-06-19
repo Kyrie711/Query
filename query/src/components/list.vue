@@ -66,7 +66,7 @@
     <el-table-column
       prop="Alteration_Microbio"
       label="Alteration_Microbio"
-      width="180">
+      width="220">
     </el-table-column>
     <el-table-column
       prop="Microbiota"
