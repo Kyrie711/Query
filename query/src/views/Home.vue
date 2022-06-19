@@ -85,7 +85,7 @@
 import TopBar from "../components/TopBar.vue";
 import List from "../components/list.vue";
 import SelectModel from "../components/SelectModel.vue"
-import {request} from "../network/request"
+import {emitDatalog} from "../api/request"
 export default {
   data() {
     return {
@@ -188,18 +188,23 @@ export default {
       // }).catch(err => {
       //   console.log(err)
       // })
-
-      // 写死
-      request({
-        url: '/query',
-      }).then(res => {
-        console.log(res.data)
-        this.post = res.data
-
-        this.ifPost = true
-        this.anim = false
-        this.names = Object.keys(this.post[0])
+      emitDatalog(query).then((res) => {
+        let cb=res.data
       })
+      // 写死
+      // request({
+      //   url: '/query',
+      // }).then(res => {
+      //   console.log(res.data)
+      //   this.post = res.data
+
+      //   this.ifPost = true
+      //   this.anim = false
+      //   this.names = Object.keys(this.post[0])
+      // })
+    },
+    getResult() {
+      
     }
   },
   components: {
@@ -207,6 +212,12 @@ export default {
     List,
     SelectModel,
   },
+  created() {
+    this.$bus.on("get-result",this.getResult)
+  },
+  beforeDestroy() {
+    this.$bus.off("get-result")
+  }
 };
 </script>
 
