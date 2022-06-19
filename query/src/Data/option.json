@@ -1,0 +1,160 @@
+[
+    {
+        "disorder":[
+            {"value":"colorectal cancer"},
+            {"value":"pancreatic head cancer"},
+            {"value":"Emily Ho"}
+        ],
+        "microbiota":[
+            {"value":"Firmicutes"},
+            {"value":"Actinobacteria"},
+            {"value":"Prevotella"},
+            {"value":"Parabacteroides"},
+            {"value":"Fusobacteria"},
+            {"value":"Fusobacterium"},
+            {"value":"Acinetobacter"},
+            {"value":"Porphyromonas"},
+            {"value":"Lactococcus"},
+            {"value":"Pseudomonas"},
+            {"value":"Bacillus"},
+            {"value":"Peptostreptococcus"},
+            {"value":"Parvimonas"},
+            {"value":"Alloprevotella"},
+            {"value":"A"},
+            {"value":"B"},
+            {"value":"C"},
+            {"value":"D"},
+            {"value":"E"},
+            {"value":"F"}
+        ],
+        "relationship":{
+            "colorectal cancer":[
+                {"value":"Firmicutes"},
+                {"value":"Actinobacteria"},
+                {"value":"Prevotella"},
+                {"value":"Parabacteroides"},
+                {"value":"Fusobacteria"},
+                {"value":"Fusobacterium"},
+                {"value":"Acinetobacter"},
+                {"value":"Porphyromonas"},
+                {"value":"Lactococcus"},
+                {"value":"Pseudomonas"},
+                {"value":"Bacillus"},
+                {"value":"Peptostreptococcus"},
+                {"value":"Parvimonas"},
+                {"value":"Alloprevotella"}
+            ],
+            "Firmicutes":[
+                {"value":"Crohn's disease"},
+                {"value":"gastritis"},
+                {"value":"autism spectrum disorder"},
+                {"value":"colorectal cancer"},
+                {"value":"ulcerative colitis"},
+                {"value":"atherosclerosis"},
+                {"value":"type 2 diabetes mellitus"},
+                {"value":"perinatal necrotizing enterocolitis"}
+            ]
+        }
+    },
+    {
+        "IF": [
+            {
+                "value": "food",
+                "label": "food",
+                "children": [{
+                  "value": "apple",
+                  "label": "apple"
+                }, {
+                  "value": "banana",
+                  "label": "banana"
+                }]
+            },
+            {
+                "value": "disorder",
+                "label": "disorder",
+                "children": [{
+                  "value": "colorectal cancer",
+                  "label": "colorectal cancer"
+                }, {
+                  "value": "Emily Ho",
+                  "label": "Emily Ho"
+                }]
+            },
+            {
+                "value": "drug",
+                "label": "drug",
+                "children": [{
+                  "value": "Vitamin A",
+                  "label": "Vitamin A"
+                }, {
+                  "value": "Iron",
+                  "label": "Iron"
+                }]
+            }
+        ]
+ 
+    },
+    {
+        "AF": [
+            {
+                "value": "Metabolite",
+                "label": "Metabolite",
+                "children": [{
+                  "value": "DNA",
+                  "label": "DNA"
+                }, {
+                  "value": "RNA",
+                  "label": "RNA"
+                }]
+            },
+            {
+                "value": "Gut_Microbiota",
+                "label": "Gut_Microbiota",
+                "children": [{
+                  "value": "Firmicutes",
+                  "label": "Firmicutes"
+                }, {
+                  "value": "Actinobacteria",
+                  "label": "Actinobacteria"
+                }, {
+                  "value": "Prevotella",
+                  "label": "Prevotella"
+                }, {
+                  "value": "Parabacteroides",
+                  "label": "Parabacteroides"
+                }, {
+                  "value": "Fusobacteria",
+                  "label": "Fusobacteria"
+                }, {
+                  "value": "Fusobacterium",
+                  "label": "Fusobacterium"
+                }, {
+                  "value": "Acinetobacter",
+                  "label": "Acinetobacter"
+                }, {
+                  "value": "Porphyromonas",
+                  "label": "Porphyromonas"
+                }, {
+                  "value": "Lactococcus",
+                  "label": "Lactococcus"
+                }, {
+                  "value": "Pseudomonas",
+                  "label": "Pseudomonas"
+                }, {
+                  "value": "Bacillus",
+                  "label": "Bacillus"
+                }, {
+                  "value": "Peptostreptococcus",
+                  "label": "Peptostreptococcus"
+                }, {
+                  "value": "Parvimonas",
+                  "label": "Parvimonas"
+                }, {
+                  "value": "Alloprevotella",
+                  "label": "Alloprevotella"
+                }]
+            }
+        ]
+ 
+    }
+]

@@ -3,13 +3,14 @@
     <div v-show="select_main" class="bg-select"></div>
     <!-- 上方导航栏 -->
     <top-bar></top-bar>
+    <select-model v-show="smShow"  @closeClick="toggleShow()" class="select-model"></select-model>
     <!-- 查询的容器 -->
     <div class="banner">
       <div class="img"></div>
       <!-- 查询框 -->
       <div class="serch-bar">
         <div @click="openselect($event)" class="option-bar">
-          <div class="option">选项</div>
+          <div class="option">option</div>
           <div class="arrow-bar">
             <img src="../assets/路径.png" />
           </div>
@@ -35,11 +36,6 @@
         <div @click="changestate(3,$event)" class="select-common" v-bind:class="{ select_button: !select_state[2].Promis, selected_button: select_state[2].Promis }">Promis</div>
         <div @click="changestate(4,$event)" class="select-common" v-bind:class="{ select_button: !select_state[3].LEI, selected_button: select_state[3].LEI }">LEI</div>
         <div @click="changestate(5,$event)" class="select-common" v-bind:class="{ select_button: !select_state[4].obdasqlite, selected_button: select_state[4].obdasqlite }">obdasqlite</div>
-        <!-- <div class="select-title">Type:</div>
-        <div @click="changestate(6,$event)" v-bind:class="{ select_button: !select_state[5].Person, selected_button: select_state[5].Person }">Person</div>
-        <div @click="changestate(7,$event)" v-bind:class="{ select_button: !select_state[6].Location, selected_button: select_state[6].Location }">Location</div>
-        <div @click="changestate(8,$event)" v-bind:class="{ select_button: !select_state[7].Case, selected_button: select_state[7].Case }">Case</div>
-        <div @click="changestate(9,$event)" v-bind:class="{ select_button: !select_state[8].All, selected_button: select_state[8].All }">All</div> -->
         <div class="select-type">
           <select required="required" v-model="selected">
             <option value="" disabled="disabled" selected="selected">
@@ -54,6 +50,9 @@
             <option value="Seven">Seven</option>
           </select>
           <!-- <span>Selected: {{selected}}</span> -->
+        </div>
+        <div class="show-selectModel" @click="toggleShow(true)">
+          <span>Select Template</span>
         </div>
         <div class="select-input">
           <span>limit:</span>
@@ -85,7 +84,8 @@
 <script>
 import TopBar from "../components/TopBar.vue";
 import List from "../components/list.vue";
-import {request} from "../network/request"
+import SelectModel from "../components/SelectModel.vue"
+import {emitDatalog} from "../api/request"
 export default {
   data() {
     return {
@@ -117,10 +117,14 @@ export default {
       runtime: '10',
       length: '8',
       names: '',
-      query: ''
+      query: '',
+      smShow:false
     };
   },
   methods: {
+    toggleShow(flag){
+      this.smShow=flag
+    },
     openselect() {
       this.select_main = !this.select_main;
     },
@@ -184,24 +188,36 @@ export default {
       // }).catch(err => {
       //   console.log(err)
       // })
-
-      // 写死
-      request({
-        url: '/query',
-      }).then(res => {
-        console.log(res.data)
-        this.post = res.data
-
-        this.ifPost = true
-        this.anim = false
-        this.names = Object.keys(this.post[0])
+      emitDatalog(query).then((res) => {
+        let cb=res.data
       })
+      // 写死
+      // request({
+      //   url: '/query',
+      // }).then(res => {
+      //   console.log(res.data)
+      //   this.post = res.data
+
+      //   this.ifPost = true
+      //   this.anim = false
+      //   this.names = Object.keys(this.post[0])
+      // })
+    },
+    getResult() {
+      
     }
   },
   components: {
     TopBar,
     List,
+    SelectModel,
   },
+  created() {
+    this.$bus.on("get-result",this.getResult)
+  },
+  beforeDestroy() {
+    this.$bus.off("get-result")
+  }
 };
 </script>
 
@@ -381,7 +397,7 @@ body {
   height: 10000px;
   background: black;
   opacity: 0.5;
-  z-index: 99;
+  z-index: 1;
   position: fixed;
   top: 0;
   left: 0;
@@ -389,7 +405,7 @@ body {
 .select-content {
   width: 70%;
   height: 53%;
-  z-index: 999;
+  z-index: 2;
   background: #ffffff;
   margin: 0 auto;
   position: absolute;
@@ -556,5 +572,17 @@ body {
   transform: translateX(-50%);
   font-size: 30px;
   color: #5b5b5b;
+}
+/* Ljx */
+.select-model{
+  z-index: 4;
+}
+.show-selectModel{
+  position: absolute;
+  bottom: -50px;
+  left: 30px;
+}
+.show-selectModel:hover{
+  color: blue;
 }
 </style>

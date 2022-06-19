@@ -5,7 +5,8 @@
 </template>
 
 <script>
-import Home from './views/Home'
+import Home from './views/Home';
+import "./assets/font/iconfont.css";
 export default {
   components: {
     Home
