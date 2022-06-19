@@ -73,8 +73,8 @@
                 "value": "disorder",
                 "label": "disorder",
                 "children": [{
-                  "value": "colorectal cancer",
-                  "label": "colorectal cancer"
+                  "value": "colorectal_cancer",
+                  "label": "colorectal_cancer"
                 }, {
                   "value": "Emily Ho",
                   "label": "Emily Ho"

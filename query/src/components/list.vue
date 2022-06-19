@@ -64,18 +64,18 @@
       width="180">
     </el-table-column>
     <el-table-column
-      prop="Alteration_microbiota"
-      label="Alteration_microbiota"
+      prop="Alteration_Microbio"
+      label="Alteration_Microbio"
       width="180">
     </el-table-column>
     <el-table-column
-      prop="Microbita"
-      label="Microbita"
+      prop="Microbiota"
+      label="Microbiota"
        width="180">
     </el-table-column>
     <el-table-column
-      prop="Alteration_gene"
-      label="Alteration_gene"
+      prop="Alteration_Gene"
+      label="Alteration_Gene"
       width="180">
     </el-table-column>
     <el-table-column
@@ -89,7 +89,7 @@
             src="../assets/cancel.png"
             class="cancel-icon"
         />
-        <Charts></Charts>
+        <Charts :datas="list"></Charts>
     </div>
 </div>
   
