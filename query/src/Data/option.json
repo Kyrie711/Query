@@ -73,8 +73,8 @@
                 "value": "disorder",
                 "label": "disorder",
                 "children": [{
-                  "value": "colorectal cancer",
-                  "label": "colorectal cancer"
+                  "value": "colorectal_cancer",
+                  "label": "colorectal_cancer"
                 }, {
                   "value": "Emily Ho",
                   "label": "Emily Ho"
@@ -84,8 +84,8 @@
                 "value": "drug",
                 "label": "drug",
                 "children": [{
-                  "value": "Vitamin A",
-                  "label": "Vitamin A"
+                  "value": "Vitamin_A",
+                  "label": "Vitamin_A"
                 }, {
                   "value": "Iron",
                   "label": "Iron"

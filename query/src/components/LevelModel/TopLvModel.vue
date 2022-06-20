@@ -40,7 +40,8 @@
 
 <script>
 import option from "../../Data/option.json"
-import {emitDatalog} from "../../api/request"
+import { emitDatalog } from "../../api/request"
+import bus from "../../utils/bus"
 export default {
   name: "TopLvModel",
   props: {
@@ -81,23 +82,15 @@ export default {
       }
       let source = this.sl1[this.sl1.length - 1];
       let target = this.sl2[this.sl2.length - 1];
-      // let datalog = `?(gut_microbiota_name, microbiota_alteration_caused_by_disorder,gene_symbol, gene_expression_alteration_caused_by_microbiota):-
-      // relationship: has_abundance_change_results_by_disorder(gut_microbiota_name,disorder_microbiota_index, ${source}).
-      // attribute: disorder_microbiota_host_type(disorder_microbiota_index, ${target}).
-      // attribute: microbiota_alteration_cuased_by_disorder(disorder_microbiota_index, microbiota_alteration_caused_by_disorder).
-      // relationship: has_expression_change_results_by_microbiota(gene_symbol, microbiota_gene_index, gut_microbiota_name).
-      // attribute:gene_expression_alteration_caused_by_microbiota(microbiota_gene_index, gene_expression_alteration_caused_by_microbiota).`
       let datalog = {
-        "datalog":`?(<Disorder>,Alteration_Microbio,Microbiota,Alteration_Gene,Gene):-relationship:has_abundance_change_results_by_disorder(Microbiota,index,${source}),
-attribute:disorder_microbiota_host_type(index,${target}),     
-attribute:microbiota_alteration_caused_by_disorder(index,Alteration_Microbio),
-relationship:has_expression_change_results_by_microbiota(Gene,index1,Microbiota),
-attribute:gene_expression_alteration_caused_by_microbiota(index1,Alteration_Gene).`
+        "datalog":`?(Disorder,Alteration_Microbio,Microbiota,Alteration_Gene,Gene):-relationship:has_abundance_change_results_by_disorder(Microbiota,Index,${source}),
+attribute:find_disorder_name(Disorder),
+attribute:disorder_microbiota_host_type(Index,${target}),
+attribute:microbiota_alteration_caused_by_disorder(Index,Alteration_Microbio),relationship:has_expression_change_results_by_microbiota(Gene,Index1,Microbiota),attribute:gene_expression_alteration_caused_by_microbiota(Index1,Alteration_Gene).`
       }
 
-      console.log(datalog);
       emitDatalog(datalog).then((res) => {
-        console.log("返回数据",res.data)
+        bus.$emit("get-result",res.data)
       })
     }
   },

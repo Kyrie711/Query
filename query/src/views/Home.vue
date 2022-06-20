@@ -85,7 +85,8 @@
 import TopBar from "../components/TopBar.vue";
 import List from "../components/list.vue";
 import SelectModel from "../components/SelectModel.vue"
-import {emitDatalog} from "../api/request"
+import { emitDatalog } from "../api/request"
+import bus from "../utils/bus"
 export default {
   data() {
     return {
@@ -118,7 +119,8 @@ export default {
       length: '8',
       names: '',
       query: '',
-      smShow:false
+      smShow: false,
+      backdata:''
     };
   },
   methods: {
@@ -203,8 +205,8 @@ export default {
       //   this.names = Object.keys(this.post[0])
       // })
     },
-    getResult() {
-      
+    getResult(backData) {
+      this.post=backData
     }
   },
   components: {
@@ -213,10 +215,10 @@ export default {
     SelectModel,
   },
   created() {
-    this.$bus.on("get-result",this.getResult)
+    bus.$on("get-result",this.getResult)
   },
   beforeDestroy() {
-    this.$bus.off("get-result")
+    bus.$off("get-result")
   }
 };
 </script>

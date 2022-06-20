@@ -1,55 +1,3 @@
-<!-- <template>
-  <div>
-      <div class="bg" v-show="table"></div>
-      <div class="bg" v-show="vis"></div>
-      <div class="list_content">
-        <div v-for="(item, index) in info.payload" :key="index">
-            <div class="list_one">
-                <div >
-                <img v-if="item.Alteration_microbiota == 'increase'" class="list_one_state_icon" src="../assets/increase.png">
-                <img v-if="item.Alteration_microbiota == 'decrease'" class="list_one_state_icon" src="../assets/decrease.png">
-                </div>
-                <div class="list_all"> 
-                    <div class="list_one_gname" v-if="names.includes('Disorder')">Disorder: {{item.Disorder}}</div>
-                    <div class="list_one_ma" v-if="names.includes('Alteration_microbiota')">Alteration_microbiota: {{item.Alteration_microbiota}}</div>
-                    <div class="list_one_microname" v-if="names.includes('Gene')">Gene: {{item.Gene}}</div>
-                </div>
-                <div class="list_button">
-                        <div class="list_button_table" @click="openTable(index)">Tab</div>
-                        <div class="list_button_vis" @click="openVis">Fig</div>
-                </div>
-                
-            </div>
-        </div>
-      </div>
-    
-    <div>
-        <div class="table" v-show="table">
-        <img src="../assets/hzau_logo.jpg" class="select-hzau-img">
-        <img
-            @click="openTable"
-            src="../assets/cancel.png"
-            class="cancel-icon"
-        />
-        <div class="info_bar">
-            <div v-for="(value, name) in temporary" :key="name" class="info">
-                <div class="info_header">{{name}}</div>
-                <div class="info_body">{{value}}</div>
-            </div>
-        </div>
-    </div>
-    <div class="vis" v-show="vis">
-        <img
-            @click="openVis"
-            src="../assets/cancel.png"
-            class="cancel-icon"
-        />
-        <Charts></Charts>
-    </div>
-    </div>
-  </div>
-</template> -->
-
 <template>
 <div>
     <el-button type="primary" class="ipt" @click="openVis">Fig</el-button>
@@ -64,18 +12,18 @@
       width="180">
     </el-table-column>
     <el-table-column
-      prop="Alteration_microbiota"
-      label="Alteration_microbiota"
+      prop="Alteration_Microbio"
+      label="Alteration_Microbio"
       width="180">
     </el-table-column>
     <el-table-column
-      prop="Microbita"
-      label="Microbita"
+      prop="Microbiota"
+      label="Microbiota"
        width="180">
     </el-table-column>
     <el-table-column
-      prop="Alteration_gene"
-      label="Alteration_gene"
+      prop="Alteration_Gene"
+      label="Alteration_Gene"
       width="180">
     </el-table-column>
     <el-table-column
