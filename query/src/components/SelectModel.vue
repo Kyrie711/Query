@@ -13,7 +13,7 @@ export default {
   name:"SelectModel",
   data () {
     return {
-      name1: "q2",
+      name1: "options",
       isShow:false
     };
   },

@@ -3,10 +3,19 @@
     <div v-show="select_main" class="bg-select"></div>
     <!-- 上方导航栏 -->
     <top-bar></top-bar>
-    <select-model v-show="smShow"  @closeClick="toggleShow()" class="select-model"></select-model>
+    <select-model
+      v-show="smShow"
+      @closeClick="toggleShow()"
+      class="select-model"
+    ></select-model>
     <!-- 查询的容器 -->
     <div class="banner">
-      <div class="img"></div>
+      <div class="site_title">
+        GMFDP
+      </div>
+      <div class="small_title">
+        Gut Microbiota Federated Data Platform
+      </div>
       <!-- 查询框 -->
       <div class="serch-bar">
         <div @click="openselect($event)" class="option-bar">
@@ -15,9 +24,18 @@
             <img src="../assets/路径.png" />
           </div>
         </div>
-        <input type="text" class="ipt" placeholder="输入查询语句" v-model="query" />
+        <input
+          type="text"
+          class="ipt"
+          placeholder="Input Datalog"
+          v-model="query"
+        />
         <div class="serch">
-          <img class="onSearch" src="../assets/路径 (1).png" @click="onSearch()"/>
+          <img
+            class="onSearch"
+            src="../assets/路径 (1).png"
+            @click="onSearch()"
+          />
         </div>
       </div>
     </div>
@@ -31,23 +49,68 @@
       />
       <div class="select-item-main">
         <div class="select-title">Source:</div>
-        <div @click="changestate(1,$event)" class="select-common" v-bind:class="{ select_button: !select_state[0].CMS, selected_button: select_state[0].CMS }">CMS</div>
-        <div @click="changestate(2,$event)" class="select-common" v-bind:class="{ select_button: !select_state[1].VMS, selected_button: select_state[1].VMS }">VMS</div>
-        <div @click="changestate(3,$event)" class="select-common" v-bind:class="{ select_button: !select_state[2].Promis, selected_button: select_state[2].Promis }">Promis</div>
-        <div @click="changestate(4,$event)" class="select-common" v-bind:class="{ select_button: !select_state[3].LEI, selected_button: select_state[3].LEI }">LEI</div>
-        <div @click="changestate(5,$event)" class="select-common" v-bind:class="{ select_button: !select_state[4].obdasqlite, selected_button: select_state[4].obdasqlite }">obdasqlite</div>
+        <div
+          @click="changestate(1, $event)"
+          class="select-common"
+          v-bind:class="{
+            select_button: !select_state[0].CMS,
+            selected_button: select_state[0].CMS,
+          }"
+        >
+          CMS
+        </div>
+        <div
+          @click="changestate(2, $event)"
+          class="select-common"
+          v-bind:class="{
+            select_button: !select_state[1].VMS,
+            selected_button: select_state[1].VMS,
+          }"
+        >
+          VMS
+        </div>
+        <div
+          @click="changestate(3, $event)"
+          class="select-common"
+          v-bind:class="{
+            select_button: !select_state[2].Promis,
+            selected_button: select_state[2].Promis,
+          }"
+        >
+          Promis
+        </div>
+        <div
+          @click="changestate(4, $event)"
+          class="select-common"
+          v-bind:class="{
+            select_button: !select_state[3].LEI,
+            selected_button: select_state[3].LEI,
+          }"
+        >
+          LEI
+        </div>
+        <div
+          @click="changestate(5, $event)"
+          class="select-common"
+          v-bind:class="{
+            select_button: !select_state[4].obdasqlite,
+            selected_button: select_state[4].obdasqlite,
+          }"
+        >
+          obdasqlite
+        </div>
         <div class="select-type">
           <select required="required" v-model="selected">
             <option value="" disabled="disabled" selected="selected">
               operation
             </option>
             <option value="knowledgeQuery">knowledgeQuery</option>
-            <option value="Two">Two</option>
+            <!-- <option value="Two">Two</option>
             <option value="Three">Three</option>
             <option value="Four">Four</option>
             <option value="Five">Five</option>
             <option value="Six">Six</option>
-            <option value="Seven">Seven</option>
+            <option value="Seven">Seven</option> -->
           </select>
           <!-- <span>Selected: {{selected}}</span> -->
         </div>
@@ -56,7 +119,7 @@
         </div>
         <div class="select-input">
           <span>limit:</span>
-          <input type="number" placeholder="100" v-model="limit"/>
+          <input type="number" placeholder="100" v-model="limit" />
         </div>
       </div>
     </div>
@@ -84,9 +147,8 @@
 <script>
 import TopBar from "../components/TopBar.vue";
 import List from "../components/list.vue";
-import SelectModel from "../components/SelectModel.vue"
-import { emitDatalog } from "../api/request"
-import bus from "../utils/bus"
+import SelectModel from "../components/SelectModel.vue";
+import { emitDatalog } from "../api/request";
 export default {
   data() {
     return {
@@ -114,112 +176,64 @@ export default {
       criteria: {},
       data: null,
       selected: "",
-      limit: '8',
-      runtime: '10',
-      length: '8',
-      names: '',
-      query: '',
+      limit: "8",
+      runtime: "10",
+      length: "8",
+      names: "",
+      query: "",
       smShow: false,
-      backdata:''
     };
   },
   methods: {
-    toggleShow(flag){
-      this.smShow=flag
+    toggleShow(flag) {
+      this.smShow = flag;
     },
     openselect() {
       this.select_main = !this.select_main;
     },
-    changestate(data,e){
-        let target=e.target.innerHTML;
-        for(let i=1;i<=9;i++)
-        {
-        if(data==i)
-        {
-          this.select_state[i-1][target]=!this.select_state[i-1][target];
-          console.log(e.target)
-        }
-        }
-      },
-    onSearch() {
-      this.btm = false
-      this.anim = true
-      let sources = []
-      for (let item of this.select_state) {
-        let ins = Object.keys(item)[0]
-        if (item[ins]) {
-          sources.push(ins)
+    changestate(data, e) {
+      let target = e.target.innerHTML;
+      for (let i = 1; i <= 9; i++) {
+        if (data == i) {
+          this.select_state[i - 1][target] = !this.select_state[i - 1][target];
+          console.log(e.target);
         }
       }
-      
-      let query = {
-        query:{
-          scope:[],
-          output:{project:{}},
-          window:{limit: this.limit},
-          filter:{query: this.query}
-          }, // 需要⻚⾯传值 //?(MicrobiotaName, GeneName, MicrobiotaAlteration):- relationship:has_disorder_effect_results(MicrobiotaName, Index, <ColorectalCancer>), attribute:microbiota_disorder_interaction_host_type(Index, <human>), attribute:disorder_expression_alteration_caused_by_microbiota(Index, MicrobiotaAlteration), relationship:has_directly_change_results(GeneIndex,GeneName,MicrobiotaName).
-          control:{
-            operation: this.selected, // 需要⻚⾯传值
-            sources: sources // 需要⻚⾯传值
-          }, //?(MicrobiotaName, MetaboliteName):- relationship:has_disorder_effect_results(MicrobiotaName, Index, <ColorectalCancer>),attribute:disorder_expression_alteration_caused_by_microbiota(Index, <increase>),attribute:microbiota_disorder_interaction_host_type(Index, <human>),relationship:generates(MicrobiotaName, MetaboliteName).
-          credentials:{
-            credentiallist:[
-              {gutmdisorder:{username:"root",password:"password"}},
-              {gutmgene:{username:"root",password:"password"}},
-              {obdasqlite:{username:"root",password:"password"}}
-            ]
-        }
-      }
-      query = JSON.stringify(query)
-      // request({
-      //   method: 'post',
-      //   url: '/query',
-      //   data: query
-      // }).then(res => {
-      //   console.log(res)
-      //   this.post = res.data.payload
-      //   this.runtime = res.data.info.runtime
-      //   this.names = Object.keys(this.post[0])
-
-
-      //   this.length = this.post.length
-      //   this.ifPost = true
-      //   this.anim = false
-        
-      // }).catch(err => {
-      //   console.log(err)
-      // })
-      emitDatalog(query).then((res) => {
-        let cb=res.data
-      })
-      // 写死
-      // request({
-      //   url: '/query',
-      // }).then(res => {
-      //   console.log(res.data)
-      //   this.post = res.data
-
-      //   this.ifPost = true
-      //   this.anim = false
-      //   this.names = Object.keys(this.post[0])
-      // })
     },
-    getResult(backData) {
-      this.post=backData
-    }
+    onSearch() {
+      this.btm = false;
+      this.anim = true;
+      this.post = "";
+      let sources = [];
+      for (let item of this.select_state) {
+        let ins = Object.keys(item)[0];
+        if (item[ins]) {
+          sources.push(ins);
+        }
+      }
+      let query = { datalog: this.query };
+
+      emitDatalog(query).then((res) => {
+        this.post = res.data;
+        this.ifPost = true;
+        this.ifPost = true;
+        this.anim = false;
+      });
+    },
   },
   components: {
     TopBar,
     List,
     SelectModel,
   },
-  created() {
-    bus.$on("get-result",this.getResult)
+  mounted() {
+    this.$bus.$on("expandDatalog", (data) => {
+      this.query = data.datalog;
+    });
   },
   beforeDestroy() {
-    bus.$off("get-result")
-  }
+    this.$bus.$off("getresult");
+  },
 };
 </script>
 
@@ -244,18 +258,7 @@ body {
   background: url("../assets/bg.png");
 }
 
-.banner .img {
-  /* 矩形 14 */
-  opacity: 0.6;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 45px;
-  width: 258px;
-  height: 126px;
-  border-radius: 10px;
-  background: url("../assets/矩形 14.png");
-}
+
 
 .banner .serch-bar {
   /* 矩形 4 */
@@ -547,44 +550,59 @@ body {
 }
 
 .rotate-animate {
-      position: absolute;
-      top:720px;
-      left: 47%;
-      transform: translateX(-50%);
-      border:10px solid #f3f3f3;
-      border-radius:50%;
-      border-top:10px solid #48a5d3;
-      width:100px;
-      height:100px;
-      animation:rotate 1s ease-in-out infinite;
+  position: absolute;
+  top: 720px;
+  left: 47%;
+  transform: translateX(-50%);
+  border: 10px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 10px solid #48a5d3;
+  width: 100px;
+  height: 100px;
+  animation: rotate 1s ease-in-out infinite;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
   }
-@keyframes rotate{
-    0%{
-        transform: rotate(0deg);
-    }
-    100%{
-        transform:rotate(360deg);
-    }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .btm {
   position: absolute;
-  top:720px;
+  top: 720px;
   left: 50%;
   transform: translateX(-50%);
   font-size: 30px;
   color: #5b5b5b;
 }
 /* Ljx */
-.select-model{
+.select-model {
   z-index: 4;
 }
-.show-selectModel{
+.show-selectModel {
   position: absolute;
   bottom: -50px;
   left: 30px;
 }
-.show-selectModel:hover{
+.show-selectModel:hover {
   color: blue;
+}
+.site_title{
+  position: absolute;
+  font-size: 58px;
+  right: 43%;
+  top: 60px;
+  color: #5a667f;
+}
+.small_title
+{
+  position: absolute;
+  font-size: 18px;
+  right: 39%;
+  bottom:195px;
+  color: #5a667f;
 }
 </style>

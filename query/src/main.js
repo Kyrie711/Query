@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import VueBus from "vue-bus"
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import App from './App.vue'
@@ -17,6 +16,8 @@ Vue.config.productionTip = false
 Vue.use(ElementUI);
 new Vue({
   router,
-  VueBus,
+    beforeCreate() {
+      Vue.prototype.$bus = this // 安装全局事件总线，$bus 就是当前应用的 vm
+    },
   render: h => h(App)
 }).$mount('#app')
